@@ -5,3 +5,11 @@ export interface Trilha {
     quantidadeConteudosTrilha: number;
     trilhaCompletada: boolean;
 }
+
+export interface PaginacaoResponse {
+    paginaAtual: number;
+    tamanhoPagina: number;
+    totalPaginas: number;
+    totalItens: number;
+    data: Trilha[];
+}
