@@ -13,15 +13,15 @@ export default {
   },
   typography: {
     title: {
-      fontSize: 24,
+      fontSize: 18,
       fontWeight: 'bold',
     },
     subtitle: {
-      fontSize: 18,
+      fontSize: 14,
       fontWeight: '500',
     },
     body: {
-      fontSize: 16,
+      fontSize: 12,
     },
   },
   spacing: {
