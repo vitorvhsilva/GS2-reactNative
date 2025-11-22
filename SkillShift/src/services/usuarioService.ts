@@ -57,10 +57,15 @@ export const usuarioService = {
     return response.json();
   },
 
-  buscarUsuarioEspecifico: async (idUsuario: string, token: string): Promise<UsuarioResponse> => {
+  buscarUsuarioEspecifico: async (
+    idUsuario: string,
+    login: UsuarioLogin
+  ): Promise<UsuarioResponse> => {
+    const { accessToken } = await usuarioService.login(login);
+
     const response = await fetch(`${USUARIOS_API}/users/${idUsuario}`, {
       method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${accessToken}` },
     });
 
     if (!response.ok) {
@@ -70,24 +75,15 @@ export const usuarioService = {
     return response.json();
   },
 
-  logout: async () => {
-    await AsyncStorage.removeItem("accessToken");
-    await AsyncStorage.removeItem("idUsuario");
-  },
-
-  storeToken: async (token: string) => {
-    await AsyncStorage.setItem("accessToken", token);
-  },
-
   storeUserId: async (id: string) => {
     await AsyncStorage.setItem("idUsuario", id);
   },
 
-  getStoredToken: async (): Promise<string | null> => {
-    return AsyncStorage.getItem("accessToken");
-  },
-
   getStoredUserId: async (): Promise<string | null> => {
     return AsyncStorage.getItem("idUsuario");
+  },
+
+  logout: async () => {
+    await AsyncStorage.removeItem("idUsuario");
   },
 };

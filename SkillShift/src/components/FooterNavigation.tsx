@@ -35,7 +35,7 @@ export const FooterNavigation: React.FC<FooterNavigationProps> = ({ active }) =>
                 />
             </FooterTouchable>
             
-            <FooterTouchable onPress={() => navigation.navigate("Home")}>
+            <FooterTouchable onPress={() => navigation.navigate("PerfilUsuario")}>
                 <FooterImage
                     source={
                         active === "perfil"
