@@ -5,10 +5,9 @@ import styled from "styled-components/native";
 import theme from "../styles/theme";
 import { HeaderNavigation } from "../components/HeaderNavigation";
 import { RouteProp } from "@react-navigation/native";
+import { Linking } from "react-native";
 import { TrilhaService } from "../services/trilhaService";
 import { ConteudoEspecifico } from "../types/conteudoTrilha";
-import YoutubePlayer from "react-native-youtube-iframe";
-
 
 type ConteudoProps = {
     navigation: NativeStackNavigationProp<RootStackParamList, "ConteudoTrilha">;
@@ -27,6 +26,11 @@ export const ConteudoTrilhaScreen: React.FC<ConteudoProps> = ({ route, navigatio
             /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
         const match = url.match(regex);
         return match ? match[1] : null;
+    };
+
+    const abrirVideoNoYoutube = () => {
+        if (!conteudo) return;
+        Linking.openURL(conteudo.textoConteudoTrilha);
     };
 
     const carregarConteudo = async () => {
@@ -68,17 +72,9 @@ export const ConteudoTrilhaScreen: React.FC<ConteudoProps> = ({ route, navigatio
                         <Titulo>{conteudo.nomeConteudoTrilha}</Titulo>
 
                         {conteudo.tipoConteudoTrilha === "Vídeo" ? (
-                            <>
-                                {extrairIdYoutube(conteudo.textoConteudoTrilha) ? (
-                                    <YoutubePlayer
-                                        height={220}
-                                        play={false}
-                                        videoId={extrairIdYoutube(conteudo.textoConteudoTrilha)!}
-                                    />
-                                ) : (
-                                    <Texto>Link de vídeo inválido</Texto>
-                                )}
-                            </>
+                            <VideoBox onPress={abrirVideoNoYoutube}>
+                                <VideoText>Abrir vídeo no YouTube</VideoText>
+                            </VideoBox>
                         ) : (
                             <Texto>{conteudo.textoConteudoTrilha}</Texto>
                         )}
@@ -132,6 +128,21 @@ const Texto = styled.Text`
     font-size: ${theme.typography.body.fontSize}px;
     line-height: 24px;
     color: ${theme.colors.preto};
+`;
+
+const VideoBox = styled.TouchableOpacity`
+    width: 100%;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: ${theme.colors.azulEscuro};
+    margin-bottom: 20px;
+    align-items: center;
+`;
+
+const VideoText = styled.Text`
+    color: ${theme.colors.branco};
+    font-family: ${theme.fonts.bold};
+    font-size: ${theme.typography.subtitle.fontSize}px;
 `;
 
 const Button = styled.TouchableOpacity<{ disabled: boolean }>`
