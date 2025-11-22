@@ -13,6 +13,16 @@ export interface AuthContextData {
   register: (data: UsuarioCadastro) => Promise<void>;
   signOut: () => Promise<void>;
   carregarUsuarioLogado: (login: UsuarioLogin) => Promise<void>;
+  updateUser: (
+    login: UsuarioLogin,
+    data: {
+      nomeUsuario: string;
+      senhaUsuario: string;
+      dia: number;
+      mes: number;
+      ano: number;
+    }
+  ) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -72,9 +82,38 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser(null);
   };
 
+  const updateUser = async (
+    login: UsuarioLogin,
+    data: {
+      nomeUsuario: string;
+      senhaUsuario: string;
+      dia: number;
+      mes: number;
+      ano: number;
+    }
+  ) => {
+    if (!user) return;
+
+    setLoading(true);
+
+    try {
+      await usuarioService.updateUsuario(user.idUsuario, login, data);
+
+      const usuarioAtualizado = await usuarioService.buscarUsuarioEspecifico(
+        user.idUsuario,
+        login
+      );
+
+      setUser(usuarioAtualizado);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
   return (
     <AuthContext.Provider
-      value={{ user, loading, signIn, register, signOut, carregarUsuarioLogado }}
+      value={{ user, loading, signIn, register, signOut, carregarUsuarioLogado, updateUser }}
     >
       {children}
     </AuthContext.Provider>

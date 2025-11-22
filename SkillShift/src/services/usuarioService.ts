@@ -75,6 +75,34 @@ export const usuarioService = {
     return response.json();
   },
 
+  updateUsuario: async (
+    idUsuario: string,
+    login: UsuarioLogin,
+    data: {
+      nomeUsuario: string;
+      senhaUsuario: string;
+      dia: number;
+      mes: number;
+      ano: number;
+    }
+  ): Promise<void> => {
+    const { accessToken } = await usuarioService.login(login);
+
+    const response = await fetch(`${USUARIOS_API}/users/${idUsuario}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error("Erro ao atualizar usuário");
+    }
+  },
+
+
   storeUserId: async (id: string) => {
     await AsyncStorage.setItem("idUsuario", id);
   },
@@ -86,4 +114,6 @@ export const usuarioService = {
   logout: async () => {
     await AsyncStorage.removeItem("idUsuario");
   },
+
+
 };
