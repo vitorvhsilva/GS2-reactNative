@@ -4,6 +4,8 @@ import {
   UsuarioLogin,
   UsuarioCadastro,
   UsuarioResponse,
+  QuestionAnswer,
+  CareerResponse,
 } from "../services/usuarioService";
 
 export interface AuthContextData {
@@ -23,6 +25,8 @@ export interface AuthContextData {
       ano: number;
     }
   ) => Promise<void>;
+  getUserCareer: (login: UsuarioLogin) => Promise<{ nomeProfissao: string | null }>;
+  createCareer: (login: UsuarioLogin, answers: QuestionAnswer[]) => Promise<CareerResponse>;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -110,10 +114,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const getUserCareer = async (login: UsuarioLogin): Promise<{ nomeProfissao: string | null }> => {
+    if (!user) throw new Error("Usuário não disponível");
+
+    const { accessToken } = await usuarioService.login(login);
+
+    return usuarioService.getUserCareer(user.idUsuario, accessToken);
+  };
+
+  const createCareer = async (login: UsuarioLogin, answers: QuestionAnswer[]): Promise<CareerResponse> => {
+    if (!user) throw new Error("Usuário não disponível");
+
+    const { accessToken } = await usuarioService.login(login);
+
+    return usuarioService.createCareer(user.idUsuario, accessToken, answers);
+  };
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, signIn, register, signOut, carregarUsuarioLogado, updateUser }}
+      value={{ user, loading, signIn, register, signOut, carregarUsuarioLogado, updateUser, getUserCareer, createCareer }}
     >
       {children}
     </AuthContext.Provider>

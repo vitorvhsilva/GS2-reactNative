@@ -15,7 +15,7 @@ export const FooterNavigation: React.FC<FooterNavigationProps> = ({ active }) =>
     return (
         <FooterContainer>
 
-            <FooterTouchable onPress={() => navigation.navigate("Home")}>
+            <FooterTouchable onPress={() => navigation.navigate("ProfissaoUsuario")}>
                 <FooterImage
                     source={
                         active === "profissao"

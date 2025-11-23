@@ -8,6 +8,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { LoginScreen } from '../screens/LoginScreen';
 import { CadastroScreen } from '../screens/CadastroScreen';
 import { PerfilUsuarioScreen } from '../screens/PerfilUsuarioScreen';
+import { ProfissaoUsuarioScreen } from '../screens/ProfissaoUsuarioScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -36,6 +37,7 @@ export const AppRoutes: React.FC = () => {
           <>        
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="PerfilUsuario" component={PerfilUsuarioScreen} />
+            <Stack.Screen name="ProfissaoUsuario" component={ProfissaoUsuarioScreen} />
             <Stack.Screen name="ConteudosTrilha" component={ConteudosTrilhaScreen} />
             <Stack.Screen name="ConteudoTrilha" component={ConteudoTrilhaScreen} />
           </>

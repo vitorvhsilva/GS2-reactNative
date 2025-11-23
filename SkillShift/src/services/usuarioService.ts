@@ -28,6 +28,20 @@ export interface UsuarioResponse {
   } | null;
 }
 
+export interface QuestionAnswer {
+  question_id: number;
+  resposta: string;
+}
+
+export interface CareerResponse {
+  descricao: string;
+  motivacao: string;
+  nome_profissao: string;
+  habilidades_principais: string[];
+  tecnologias_relacionadas: string[];
+  trilha_de_aprendizado: string[];
+}
+
 export const usuarioService = {
   login: async (data: UsuarioLogin): Promise<{ accessToken: string; idUsuario: string }> => {
     const response = await fetch(`${USUARIOS_API}/login`, {
@@ -115,5 +129,24 @@ export const usuarioService = {
     await AsyncStorage.removeItem("idUsuario");
   },
 
+  getUserCareer: async (idUsuario: string, token: string) => {
+    const response = await fetch(`${USUARIOS_API}/users/${idUsuario}/career`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
+    if (!response.ok) throw new Error("Erro ao buscar carreira do usuário");
+    return response.json() as Promise<{ idUsuario: string; nomeProfissao: string | null }>;
+  },
+
+  createCareer: async (idUsuario: string, token: string, answers: QuestionAnswer[]) => {
+    const response = await fetch(`${USUARIOS_API}/users/${idUsuario}/career`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      body: JSON.stringify({ answers }),
+    });
+
+    if (!response.ok) throw new Error("Erro ao criar carreira do usuário");
+    return response.json() as Promise<CareerResponse>;
+  },
 };
