@@ -1,0 +1,343 @@
+[
+    {
+        "httpRequest": {
+            "method": "OPTIONS",
+            "path": ".*"
+        },
+        "httpResponse": {
+            "statusCode": 200,
+            "headers": {
+                "Access-Control-Allow-Origin": [
+                    "*"
+                ],
+                "Access-Control-Allow-Methods": [
+                    "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+                ],
+                "Access-Control-Allow-Headers": [
+                    "Content-Type",
+                    "Authorization",
+                    "x-api-key"
+                ],
+                "Access-Control-Max-Age": [
+                    "86400"
+                ]
+            }
+        }
+    },
+    {
+        "httpRequest": {
+            "method": "POST",
+            "path": "/login"
+        },
+        "httpResponse": {
+            "statusCode": 200,
+            "body": {
+                "accessToken": "mock-token-123",
+                "idUsuario": "mock-user-001"
+            },
+            "headers": {
+                "Access-Control-Allow-Origin": [
+                    "*"
+                ],
+                "Content-Type": [
+                    "application/json"
+                ]
+            }
+        }
+    },
+    {
+        "httpRequest": {
+            "method": "POST",
+            "path": "/users"
+        },
+        "httpResponse": {
+            "statusCode": 201,
+            "body": {
+                "idUsuario": "mock-user-001",
+                "emailUsuario": "mock@email.com",
+                "nomeUsuario": "Mock User",
+                "dataNascimentoUsuario": "2000-01-01",
+                "localizacao": {
+                    "cep": "00000000",
+                    "logradouro": "Rua Mock",
+                    "estado": "SP"
+                }
+            },
+            "headers": {
+                "Access-Control-Allow-Origin": [
+                    "*"
+                ],
+                "Content-Type": [
+                    "application/json"
+                ]
+            }
+        }
+    },
+    {
+        "httpRequest": {
+            "method": "GET",
+            "path": "/users/.*"
+        },
+        "httpResponse": {
+            "statusCode": 200,
+            "body": {
+                "idUsuario": "mock-user-001",
+                "emailUsuario": "mock@email.com",
+                "nomeUsuario": "Mock User",
+                "dataNascimentoUsuario": "2000-01-01",
+                "localizacao": {
+                    "cep": "00000000",
+                    "logradouro": "Rua Mock",
+                    "estado": "SP"
+                }
+            },
+            "headers": {
+                "Access-Control-Allow-Origin": [
+                    "*"
+                ],
+                "Content-Type": [
+                    "application/json"
+                ]
+            }
+        }
+    },
+    {
+        "httpRequest": {
+            "method": "PUT",
+            "path": "/users/.*"
+        },
+        "httpResponse": {
+            "statusCode": 200,
+            "body": {
+                "message": "Usuário atualizado com sucesso"
+            },
+            "headers": {
+                "Access-Control-Allow-Origin": [
+                    "*"
+                ],
+                "Content-Type": [
+                    "application/json"
+                ]
+            }
+        }
+    },
+    {
+        "httpRequest": {
+            "method": "GET",
+            "path": "/users/.*/career"
+        },
+        "httpResponse": {
+            "statusCode": 200,
+            "body": {
+                "idUsuario": "mock-user-001",
+                "nomeProfissao": "Engenheiro de IA"
+            },
+            "headers": {
+                "Access-Control-Allow-Origin": [
+                    "*"
+                ],
+                "Content-Type": [
+                    "application/json"
+                ]
+            }
+        }
+    },
+    {
+        "httpRequest": {
+            "method": "POST",
+            "path": "/users/.*/career"
+        },
+        "httpResponse": {
+            "statusCode": 201,
+            "body": {
+                "descricao": "Carreira gerada via mock",
+                "motivacao": "Você gosta de tecnologia e inovação",
+                "nome_profissao": "Cientista de Dados",
+                "habilidades_principais": [
+                    "Python",
+                    "Estatística",
+                    "ML"
+                ],
+                "tecnologias_relacionadas": [
+                    "TensorFlow",
+                    "PyTorch"
+                ],
+                "trilha_de_aprendizado": [
+                    "Lógica",
+                    "Programação",
+                    "IA"
+                ]
+            },
+            "headers": {
+                "Access-Control-Allow-Origin": [
+                    "*"
+                ],
+                "Content-Type": [
+                    "application/json"
+                ]
+            }
+        }
+    },
+    {
+        "httpRequest": {
+            "method": "GET",
+            "path": "/api/v1/usuarios/.*/trilhas"
+        },
+        "httpResponse": {
+            "statusCode": 200,
+            "body": {
+                "paginaAtual": 1,
+                "tamanhoPagina": 5,
+                "totalPaginas": 2,
+                "totalItens": 10,
+                "data": [
+                    {
+                        "idTrilha": "abfaadcb-eaf7-4fef-aa3b-e3c99e257a6d",
+                        "nomeTrilha": "Carreira em Tecnologia",
+                        "quantidadeConteudosTrilha": 2,
+                        "trilhaCompletada": false
+                    },
+                    {
+                        "idTrilha": "ae8d00b7-3580-4c2a-b88e-734af5c30921",
+                        "nomeTrilha": "Empreendedorismo Moderno",
+                        "quantidadeConteudosTrilha": 2,
+                        "trilhaCompletada": false
+                    },
+                    {
+                        "idTrilha": "b337644e-eb7d-44b4-8c31-77ef4d9a9032",
+                        "nomeTrilha": "Criatividade e Inovação",
+                        "quantidadeConteudosTrilha": 2,
+                        "trilhaCompletada": false
+                    },
+                    {
+                        "idTrilha": "dcc7cd01-414b-4a4f-bf6b-4bc62e56b7cb",
+                        "nomeTrilha": "Liderança e Gestão",
+                        "quantidadeConteudosTrilha": 3,
+                        "trilhaCompletada": false
+                    },
+                    {
+                        "idTrilha": "f0c9f1b4-0cc9-44b3-b3da-7e51d241a4f5",
+                        "nomeTrilha": "Introdução ao Futuro do Trabalho",
+                        "quantidadeConteudosTrilha": 3,
+                        "trilhaCompletada": false
+                    }
+                ]
+            },
+            "headers": {
+                "Access-Control-Allow-Origin": [
+                    "*"
+                ],
+                "Content-Type": [
+                    "application/json"
+                ]
+            }
+        }
+    },
+    {
+        "httpRequest": {
+            "method": "GET",
+            "path": "/api/v1/usuarios/.*/trilhas/.*/conteudos"
+        },
+        "httpResponse": {
+            "statusCode": 200,
+            "body": {
+                "data": {
+                    "trilhaConcluida": false,
+                    "conteudos": [
+                        {
+                            "idConteudoTrilha": "1b2c3d4e-4567-7689-a384-2e3f4a5b6c76",
+                            "nomeConteudoTrilha": "Comunicação Efetiva",
+                            "tipoConteudoTrilha": "Artigo",
+                            "conteudoTrilhaConcluida": true
+                        },
+                        {
+                            "idConteudoTrilha": "2c3d4e5f-5678-879a-b495-3f4a5b6c7d87",
+                            "nomeConteudoTrilha": "Trabalho em Equipe",
+                            "tipoConteudoTrilha": "Vídeo",
+                            "conteudoTrilhaConcluida": false
+                        },
+                        {
+                            "idConteudoTrilha": "3d4e5f60-6789-98ab-c5a6-4a5b6c7d8e98",
+                            "nomeConteudoTrilha": "Feedback Construtivo",
+                            "tipoConteudoTrilha": "Artigo",
+                            "conteudoTrilhaConcluida": false
+                        }
+                    ]
+                }
+            },
+            "headers": {
+                "Access-Control-Allow-Origin": [
+                    "*"
+                ],
+                "Content-Type": [
+                    "application/json"
+                ]
+            }
+        }
+    },
+    {
+        "httpRequest": {
+            "method": "GET",
+            "path": "/api/v1/usuarios/.*/trilhas/.*/conteudos/.*"
+        },
+        "httpResponse": {
+            "statusCode": 200,
+            "body": {
+                "data": {
+                    "idConteudoTrilha": "2c3d4e5f-5678-879a-b495-3f4a5b6c7d87",
+                    "nomeConteudoTrilha": "Trabalho em Equipe",
+                    "tipoConteudoTrilha": "Vídeo",
+                    "textoConteudoTrilha": "https://www.youtube.com/watch?v=r6HcE6Bc6KE",
+                    "conteudoTrilhaConcluida": false
+                },
+                "links": {
+                    "self": {
+                        "href": "/api/v1/usuarios/5e5fc7b4-863d-4e8a-b0bb-c93a4360f972/trilhas/f45b7fa3-52e5-455c-80be-68b52ca90212/conteudos/2c3d4e5f-5678-879a-b495-3f4a5b6c7d87",
+                        "method": "GET"
+                    },
+                    "listarConteudos": {
+                        "href": "/api/v1/usuarios/5e5fc7b4-863d-4e8a-b0bb-c93a4360f972/trilhas/f45b7fa3-52e5-455c-80be-68b52ca90212/conteudos",
+                        "method": "GET"
+                    },
+                    "concluirConteudo": {
+                        "href": "/api/v1/usuarios/5e5fc7b4-863d-4e8a-b0bb-c93a4360f972/trilhas/f45b7fa3-52e5-455c-80be-68b52ca90212/conteudos/2c3d4e5f-5678-879a-b495-3f4a5b6c7d87",
+                        "method": "PATCH"
+                    },
+                    "proximo": {
+                        "href": "/api/v1/usuarios/5e5fc7b4-863d-4e8a-b0bb-c93a4360f972/trilhas/f45b7fa3-52e5-455c-80be-68b52ca90212/conteudos/3d4e5f60-6789-98ab-c5a6-4a5b6c7d8e98",
+                        "method": "GET"
+                    },
+                    "anterior": {
+                        "href": "/api/v1/usuarios/5e5fc7b4-863d-4e8a-b0bb-c93a4360f972/trilhas/f45b7fa3-52e5-455c-80be-68b52ca90212/conteudos/1b2c3d4e-4567-7689-a384-2e3f4a5b6c76",
+                        "method": "GET"
+                    }
+                }
+            },
+            "headers": {
+                "Access-Control-Allow-Origin": [
+                    "*"
+                ],
+                "Content-Type": [
+                    "application/json"
+                ]
+            }
+        }
+    },
+    {
+        "httpRequest": {
+            "method": "PATCH",
+            "path": "/api/v1/usuarios/.*/trilhas/.*/conteudos/.*"
+        },
+        "httpResponse": {
+            "statusCode": 200,
+            "headers": {
+                "Access-Control-Allow-Origin": [
+                    "*"
+                ],
+                "Content-Type": [
+                    "application/json"
+                ]
+            }
+        }
+    }
+]
