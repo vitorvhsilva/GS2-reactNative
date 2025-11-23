@@ -2,7 +2,7 @@
 
 SkillShift é uma aplicação mobile desenvolvida em React Native que permite aos usuários explorar e seguir trilhas de aprendizado profissional.
 
-## Vídeo demonstrativo da aplicaçao
+## Vídeo demonstrativo da aplicação
 
 #### https://youtu.be/obDgXwKUiQA
 
